@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Freshpaint HTTP API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track a custom event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.perfalytics.com/track",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"event\": \"Order Completed\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"revenue\": 49.99\n  }\n}"
+            }
+          },
+          "docs": "Send a custom tracked event to Freshpaint. Authentication uses the environment token in properties.token."
+        },
+        {
+          "info": {
+            "name": "Identify a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.perfalytics.com/track",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"event\": \"$identify\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"$user_props\": {\n      \"plan\": \"pro\",\n      \"company\": \"Acme\"\n    }\n  }\n}"
+            }
+          },
+          "docs": "Server-side identify via the $identify event, attaching user properties ($user_props) to a distinct_id."
+        },
+        {
+          "info": {
+            "name": "Send a page event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.perfalytics.com/track",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"event\": \"$page\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"name\": \"Pricing\",\n    \"category\": \"Marketing\",\n    \"url\": \"https://www.example.com/pricing\"\n  }\n}"
+            }
+          },
+          "docs": "Send a page event to trigger a virtual pageview in downstream destinations."
+        }
+      ]
+    }
+  ]
+}

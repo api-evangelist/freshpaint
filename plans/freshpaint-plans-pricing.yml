@@ -1,0 +1,100 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Freshpaint
+providerId: freshpaint
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Customer Data Platform
+- Event Tracking
+- Healthcare
+- HIPAA
+- Privacy
+- Analytics
+- Plans
+description: >-
+  Freshpaint is a sales-led healthcare privacy and customer-data platform.
+  Pricing is not published as fixed public tiers; it is based on data volume
+  (monthly tracked users / events), implementation complexity, and activation
+  needs, and is quoted by contacting sales. A free tier is referenced for very
+  small usage (reported under ~1,000 monthly tracked users). Specific dollar
+  figures are not published and are not reconciled in this artifact.
+notes: >-
+  Public pricing pages do not list per-tier dollar amounts; figures shown by
+  third-party marketplaces vary and are not authoritative. Verify against a
+  Freshpaint sales quote during reconciliation.
+sources:
+- https://www.freshpaint.io/pricing
+- https://www.freshpaint.io/contact-sales
+plans:
+- id: freshpaint-free
+  name: Free
+  type: free
+  description: >-
+    Entry-level usage reported for very small volumes (under roughly 1,000
+    monthly tracked users). Exact inclusions are not published.
+  entries:
+  - label: Monthly Tracked Users
+    name: free_mtu
+    type: usage
+    metric: tracked_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free under reported MTU threshold
+    userMultiplied: false
+  elements:
+  - name: Event Tracking
+  - name: Destinations
+- id: freshpaint-platform
+  name: Platform
+  type: usage
+  description: >-
+    Usage-based plan quoted by sales based on data volume, implementation
+    complexity, and activation needs, including HIPAA-compliant event
+    tracking, data governance, and destination fan-out.
+  entries:
+  - label: Volume-Based Subscription
+    name: volume_subscription
+    type: usage
+    metric: tracked_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Event Tracking
+  - name: Data Governance and Verification
+  - name: Web Tracker Monitoring
+  - name: Destinations
+  - name: Analytics and Reporting
+- id: freshpaint-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom agreements for larger healthcare organizations with higher data
+    volumes, compliance requirements (HIPAA / BAA), and dedicated support.
+    Contact Freshpaint sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: HIPAA BAA
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,56 @@
+aid: freshpaint
+name: Freshpaint
+review:
+  question: Does Freshpaint expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No streaming surface (WebSocket or HTTP Server-Sent Events) is documented
+    for Freshpaint. The server-side API is a request/response REST ingestion
+    endpoint (POST /track), so no AsyncAPI document was authored.
+findings:
+  summary: |
+    Freshpaint does not publish a documented public WebSocket API. The
+    server-side HTTP API is a single REST ingestion endpoint, POST
+    https://api.perfalytics.com/track, used to send custom tracked events,
+    server-side identify ($identify), and page/screen events. Authentication
+    is performed with an environment token supplied in the event payload
+    (properties.token). The browser/mobile SDKs (track, identify, page,
+    group, alias) ultimately deliver to the same ingestion host. Destinations
+    are configured in the Freshpaint app; no public REST API for destination
+    configuration is documented. No realtime, bidirectional, or streaming
+    (ws:// or wss://) endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.perfalytics.com
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Freshpaint's HTTP API reference or developer docs as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.perfalytics.com/track
+  notesOnConfiguration: |
+    Destination management and source/environment configuration are performed
+    through the Freshpaint application UI. Per-event destination routing is
+    controlled with the $options property on the /track payload. No documented
+    public REST API exists for CRUD over destinations or sources.
+sources:
+  - url: https://documentation.freshpaint.io/reference/developer/http-api
+    type: APIReference
+    note: Documents POST /track on host api.perfalytics.com, token-in-body auth, and the 5000 req/sec burst limit. No WebSocket.
+  - url: https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference
+    type: Documentation
+    note: Web SDK methods (track, identify, page, group, alias) deliver to the same ingestion host; no streaming transport.
+  - url: https://documentation.freshpaint.io/integrations/destinations
+    type: Documentation
+    note: Destinations are configured in-app; no public configuration API documented.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists; Freshpaint's documented API is
+    REST request/response only, so no AsyncAPI document was authored.

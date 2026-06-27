@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Freshpaint
+providerId: freshpaint
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Customer Data Platform
+- Event Tracking
+- Healthcare
+- HIPAA
+- Privacy
+- Analytics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Freshpaint spend. Freshpaint is a sales-led healthcare
+  privacy / customer-data platform priced by data volume (monthly tracked
+  users / events), implementation complexity, and activation needs rather
+  than published per-unit rates. The primary cost driver is the volume of
+  events ingested through the HTTP API and SDKs and fanned out to
+  destinations. Specific rates are quoted by sales and are not reconciled.
+notes: >-
+  No public per-unit pricing is published; meters below describe the likely
+  cost drivers (tracked users, events, destinations) for allocation and
+  optimization. Verify against a Freshpaint contract during reconciliation.
+sources:
+- https://www.freshpaint.io/pricing
+- https://www.freshpaint.io/contact-sales
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Freshpaint
+serviceCategory: Analytics
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Freshpaint
+  ServiceCategory: Analytics
+  ProviderName: Freshpaint
+  PublisherName: Freshpaint
+  InvoiceIssuerName: Freshpaint
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription
+meters:
+- name: monthly_tracked_users
+  description: Unique users tracked per month, a primary subscription sizing driver.
+  unit: tracked_users
+  aggregation: max
+  dimensions:
+  - account
+  - environment
+- name: events
+  description: Events ingested via the HTTP API and SDKs and routed to destinations.
+  unit: events
+  aggregation: sum
+  dimensions:
+  - account
+  - environment
+  - event
+- name: destinations
+  description: Number of active destinations data is fanned out to.
+  unit: destinations
+  aggregation: max
+  dimensions:
+  - account
+  - environment
+principles:
+- name: Visibility
+  description: Track monthly tracked users and event volume per environment against the contracted plan.
+- name: Allocation
+  description: Use separate environments / tokens per property or team and map to internal cost centers.
+- name: Optimization
+  description: Filter unnecessary events and limit destination fan-out with $options to control volume-based costs.
+- name: Accountability
+  description: Assign owners per environment and review tracked-user and event volume against budget and contract terms.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

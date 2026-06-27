@@ -1,0 +1,117 @@
+{
+  "info": {
+    "name": "Freshpaint HTTP API",
+    "description": "Server-side HTTP API for Freshpaint. Send custom tracked events, server-side identify, and page/screen events to POST https://api.perfalytics.com/track. Authentication uses your environment token supplied in properties.token.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.perfalytics.com"
+    },
+    {
+      "key": "token",
+      "value": "YOUR_ENVIRONMENT_ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Track a custom event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/track",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "track"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"Order Completed\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"{{token}}\",\n    \"time\": 1719446400,\n    \"revenue\": 49.99\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Send a custom tracked event to Freshpaint. The event is routed to all active destinations."
+          }
+        },
+        {
+          "name": "Identify a user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/track",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "track"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"$identify\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"{{token}}\",\n    \"time\": 1719446400,\n    \"$user_props\": {\n      \"plan\": \"pro\",\n      \"company\": \"Acme\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Server-side identify via the $identify event, attaching user properties ($user_props) to a distinct_id."
+          }
+        },
+        {
+          "name": "Send a page event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/track",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "track"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"$page\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"{{token}}\",\n    \"time\": 1719446400,\n    \"name\": \"Pricing\",\n    \"category\": \"Marketing\",\n    \"url\": \"https://www.example.com/pricing\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Send a page event to trigger a virtual pageview in downstream destinations."
+          }
+        }
+      ]
+    }
+  ]
+}

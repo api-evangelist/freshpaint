@@ -1,0 +1,51 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Freshpaint
+providerId: freshpaint
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Customer Data Platform
+- Event Tracking
+- Healthcare
+- HIPAA
+- Privacy
+- Analytics
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Freshpaint server-side HTTP API documents a 5000 request/second burst
+  request limit for ingestion at POST /track; clients are asked to throttle
+  requests accordingly. Other quotas (per-account, per-environment, or
+  destination-specific limits) are not publicly documented and are not
+  reconciled in this artifact.
+notes: >-
+  Only the documented 5000 req/sec burst limit is confirmed from the HTTP API
+  reference. Verify any account- or destination-level limits with Freshpaint
+  during reconciliation.
+sources:
+- https://documentation.freshpaint.io/reference/developer/http-api
+responseCodes:
+  throttled: 429
+limits:
+- name: HTTP API Burst Limit
+  scope: account
+  metric: requests
+  limit: 5000 per second
+  notes: Documented burst request limit on POST /track; throttle requests accordingly.
+- name: Destination Limits
+  scope: destination
+  metric: requests
+  limit: see provider documentation
+  notes: Downstream destinations may impose their own rate limits; not documented by Freshpaint.
+policies:
+- name: Throttling
+  description: Clients should throttle requests to stay within the 5000 req/sec burst limit on the HTTP API.
+- name: Backoff Strategy
+  description: Clients should implement retry with backoff and honor 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

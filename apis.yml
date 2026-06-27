@@ -1,0 +1,106 @@
+aid: freshpaint
+url: https://raw.githubusercontent.com/api-evangelist/freshpaint/refs/heads/main/apis.yml
+name: Freshpaint
+kind: company
+description: Freshpaint is a healthcare privacy platform and customer-data platform
+  that collects first-party event data and governs it for HIPAA compliance before
+  fanning it out to 100+ marketing, analytics, and data destinations. Its server-side
+  HTTP API ingests track, identify, page, and screen events at https://api.perfalytics.com/track
+  authenticated with an environment token.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Customer Data Platform
+- Event Tracking
+- Healthcare
+- HIPAA
+- Privacy
+- Analytics
+created: '2026-06-25'
+modified: '2026-06-25'
+specificationVersion: '0.19'
+apis:
+- aid: freshpaint:freshpaint-tracking-events-api
+  name: Freshpaint Tracking Events API
+  tags:
+  - Events
+  - Tracking
+  - Server Side
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.freshpaint.io/reference/developer/http-api
+  baseURL: https://api.perfalytics.com
+  properties:
+  - url: https://documentation.freshpaint.io/reference/developer/http-api
+    type: Documentation
+  - url: https://documentation.freshpaint.io/integrations/sources/server-side
+    type: APIReference
+  - url: openapi/freshpaint-openapi.yml
+    type: OpenAPI
+  description: Server-side HTTP API for sending custom tracked events to Freshpaint
+    via POST /track, authenticated with an environment token in the event payload
+    and routed to all active destinations.
+- aid: freshpaint:freshpaint-identify-api
+  name: Freshpaint Identify API
+  tags:
+  - Identify
+  - User Profiles
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.freshpaint.io/reference/developer/http-api
+  baseURL: https://api.perfalytics.com
+  properties:
+  - url: https://documentation.freshpaint.io/reference/developer/http-api
+    type: Documentation
+  - url: openapi/freshpaint-openapi.yml
+    type: OpenAPI
+  description: Server-side identify via the $identify event on POST /track, attaching
+    user properties ($user_props) to a distinct_id to build unified user profiles.
+- aid: freshpaint:freshpaint-page-screen-api
+  name: Freshpaint Page and Screen API
+  tags:
+  - Page
+  - Screen
+  - Pageviews
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference
+  baseURL: https://api.perfalytics.com
+  properties:
+  - url: https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference
+    type: Documentation
+  - url: openapi/freshpaint-openapi.yml
+    type: OpenAPI
+  description: Page and screen events sent through POST /track to trigger virtual
+    pageviews and screen views in downstream destinations, carrying name, category,
+    and contextual properties.
+- aid: freshpaint:freshpaint-destinations
+  name: Freshpaint Destinations
+  tags:
+  - Destinations
+  - Integrations
+  - Data Activation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.freshpaint.io/integrations/destinations
+  baseURL: https://api.perfalytics.com
+  properties:
+  - url: https://documentation.freshpaint.io/integrations/destinations
+    type: Documentation
+  description: Destinations are the marketing, analytics, advertising, and data-warehouse
+    tools Freshpaint forwards collected events to. Destinations are configured in
+    the Freshpaint app; per-event routing is controlled with the $options property
+    on the HTTP API. No public REST API for destination configuration is documented.
+common:
+- type: GitHubOrganization
+  url: https://github.com/freshpaint-io
+- type: LinkedIn
+  url: https://www.linkedin.com/company/freshpaint
+- type: Website
+  url: https://www.freshpaint.io
+- type: Documentation
+  url: https://documentation.freshpaint.io
+- type: Plans
+  url: plans/freshpaint-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/freshpaint-rate-limits.yml
+- type: FinOps
+  url: finops/freshpaint-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
