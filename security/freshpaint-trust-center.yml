@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://trust.freshpaint.io/
+url: https://trust.freshpaint.io/
+certifications:
+- SOC 2
+- HIPAA
+evidence:
+- source: https://trust.freshpaint.io/
+  keywords:
+  - soc 2
+  - soc2
+  - hipaa
+  - trust center

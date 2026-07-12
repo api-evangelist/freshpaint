@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/freshpaint-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: EnvironmentToken
+  type: apiKey
+  in: query
+  parameter: token
+  description: Freshpaint authenticates server-side events with your environment ID (token).
+    The token is supplied inside the event payload as properties.token rather than as a header
+    or query string; this scheme documents the token-based, in-body authentication used by the
+    HTTP API. Obtain the token from the Server Side API section of the Sources page in the Freshpaint
+    app.
+  sources:
+  - openapi/freshpaint-openapi.yml

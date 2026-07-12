@@ -87,6 +87,12 @@ apis:
     the Freshpaint app; per-event routing is controlled with the $options property
     on the HTTP API. No public REST API for destination configuration is documented.
 common:
+- type: TrustCenter
+  url: security/freshpaint-trust-center.yml
+- type: DomainSecurity
+  url: security/freshpaint-domain-security.yml
+- type: Authentication
+  url: authentication/freshpaint-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/freshpaint-io
 - type: LinkedIn
@@ -101,6 +107,8 @@ common:
   url: rate-limits/freshpaint-rate-limits.yml
 - type: FinOps
   url: finops/freshpaint-finops.yml
+- type: Blog
+  url: https://www.freshpaint.io/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
