@@ -87,6 +87,8 @@ apis:
     the Freshpaint app; per-event routing is controlled with the $options property
     on the HTTP API. No public REST API for destination configuration is documented.
 common:
+- type: AgenticAccess
+  url: agentic-access/freshpaint-agentic-access.yml
 - type: TrustCenter
   url: security/freshpaint-trust-center.yml
 - type: DomainSecurity
