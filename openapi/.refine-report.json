@@ -1,0 +1,14 @@
+{
+  "provider": "freshpaint",
+  "sources": [
+    "freshpaint-events-api-openapi.yml"
+  ],
+  "outputs": [
+    "freshpaint-events-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
