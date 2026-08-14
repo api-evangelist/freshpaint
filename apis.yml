@@ -29,8 +29,13 @@ tags:
 - Privacy
 - Analytics
 created: '2026-06-25'
-modified: '2026-06-25'
+modified: '2026-08-13'
 specificationVersion: '0.19'
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1
 apis:
 - aid: freshpaint:freshpaint-destinations
   name: Freshpaint Destinations
@@ -64,6 +69,12 @@ apis:
     url: https://documentation.freshpaint.io/integrations/sources/server-side
   - type: Documentation
     url: https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference
+  - type: Overlay
+    url: overlays/freshpaint-events-api-overlay.yaml
+  - type: DataModel
+    url: data-model/freshpaint-data-model.yml
+  - type: ErrorCatalog
+    url: errors/freshpaint-problem-types.yml
 common:
 - type: AgenticAccess
   url: agentic-access/freshpaint-agentic-access.yml
@@ -89,6 +100,40 @@ common:
   url: finops/freshpaint-finops.yml
 - type: Blog
   url: https://www.freshpaint.io/blog
+- type: Packages
+  url: packages/freshpaint-packages.yml
+- type: SDKs
+  url: packages/freshpaint-packages.yml
+- type: LLMsTxt
+  url: llms/freshpaint-llms.txt
+- type: Lifecycle
+  url: lifecycle/freshpaint-lifecycle.yml
+- type: StatusPage
+  url: https://status.freshpaint.io
+- type: ChangeLog
+  url: changelog/freshpaint-changelog.yml
+- type: Conventions
+  url: conventions/freshpaint-conventions.yml
+- type: Idempotency
+  url: conventions/freshpaint-conventions.yml
+- type: Conformance
+  url: conformance/freshpaint-conformance.yml
+- type: Compliance
+  url: https://trust.freshpaint.io/
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Pricing
+  url: https://www.freshpaint.io/pricing
+- type: SignUp
+  url: https://app.freshpaint.io/login
+- type: TermsOfService
+  url: https://www.freshpaint.io/terms
+- type: PrivacyPolicy
+  url: https://www.freshpaint.io/privacy-policy
+- type: Support
+  url: https://www.freshpaint.io/contact-us
+- type: HelpCenter
+  url: https://www.freshpaint.io/faq
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
