@@ -30,7 +30,7 @@ tags:
 - Analytics
 created: '2026-06-25'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 x-enrichment:
   date: '2026-08-13'
   status: enriched
