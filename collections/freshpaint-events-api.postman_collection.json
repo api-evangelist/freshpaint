@@ -1,0 +1,219 @@
+{
+  "item": [
+    {
+      "id": "3f1f3c57-9fb5-481f-bded-170abb610eb7",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bcd34146-7b79-49b6-a24e-a42fd6873daf",
+          "name": "Send a server-side event to Freshpaint.",
+          "request": {
+            "name": "Send a server-side event to Freshpaint.",
+            "description": {
+              "content": "Send a single server-side event to Freshpaint. The event is routed to all active destinations unless restricted via the $options property. Reserved event names ($identify, $page, $screen) drive identify, page, and screen behavior; any other value of `event` is treated as a custom tracked event. The environment token is supplied in properties.token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"<string>\",\n  \"properties\": {\n    \"distinct_id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"time\": \"<long>\",\n    \"$device_id\": \"<string>\",\n    \"$insert_id\": \"<string>\",\n    \"$ip\": \"<string>\",\n    \"$user_props\": {\n      \"key_0\": \"string\"\n    },\n    \"$options\": {\n      \"key_0\": 1365.7869261977207\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecfd8dd1-194a-4ccb-972b-3993cd2c1a69",
+              "name": "Event accepted for ingestion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"Order Completed\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"revenue\": 49.99\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a29b9d46-642e-49c7-976e-b347a2348300",
+              "name": "Malformed event payload or missing required properties.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"Order Completed\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"revenue\": 49.99\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff052c9e-c538-43ab-acf6-39d4ef494da8",
+              "name": "Rate limited. The HTTP API enforces a 5000 request/second burst limit; throttle requests accordingly.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"Order Completed\",\n  \"properties\": {\n    \"distinct_id\": \"user@example.com\",\n    \"token\": \"YOUR_ENVIRONMENT_ID\",\n    \"time\": 1719446400,\n    \"revenue\": 49.99\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.perfalytics.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ee8a9689-8e3a-44d6-bb1e-fff665bcfde1",
+    "name": "Freshpaint HTTP Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Freshpaint server-side HTTP API for sending events to Freshpaint from your backend. Events are sent as POST requests to the /track endpoint and are fanned out to your active destinations. The same endpoint is used to track custom events, identify users ($identify), and emit page and screen events. Authentication is performed with your environment token, supplied in the event payload as properties.token.\n\nContact Support:\n Name: Freshpaint Support",
+      "type": "text/plain"
+    }
+  }
+}

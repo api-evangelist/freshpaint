@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/freshpaint-events-api-openapi.yml
+description: >-
+  Entity graph derived from the OpenAPI components.schemas of the Freshpaint
+  HTTP Events API. The public contract is deliberately narrow — a single event
+  envelope with an open property bag — so the model below is the whole public
+  data model, not a slice of a larger one. The Freshpaint app's own objects
+  (destinations, environments, consent rules, audiences, tracker inventory)
+  have no public REST representation and are recorded as unmodeled.
+entities:
+- name: Event
+  schema: '#/components/schemas/Event'
+  description: >-
+    The ingestion envelope. `event` names the action; reserved values $identify,
+    $page and $screen switch the envelope into identify, page and screen
+    semantics, and any other string is a custom tracked event.
+  required: [event, properties]
+  fields:
+  - {name: event, type: string, required: true, description: Event name or reserved verb}
+  - {name: properties, type: object, required: true, ref: EventProperties}
+  discriminator:
+    field: event
+    kind: reserved-value
+    variants:
+    - {value: $identify, meaning: Server-side identify — attach $user_props to the profile keyed by distinct_id}
+    - {value: $page, meaning: Page view event}
+    - {value: $screen, meaning: Mobile screen view event}
+    - {value: '<any other string>', meaning: Custom tracked event}
+    note: >-
+      This is a value-based variant, not an OpenAPI discriminator — the spec
+      declares one schema and expresses the variants in prose plus request
+      examples. An agent must read the description to know the reserved names.
+- name: EventProperties
+  schema: '#/components/schemas/EventProperties'
+  description: >-
+    Open property bag (additionalProperties:true). Carries identity, timing,
+    authentication, deduplication and routing in one flat object.
+  required: [distinct_id, token, time]
+  fields:
+  - {name: distinct_id, type: string, required: true, role: identity-key, description: Uniquely identifies the user, usually an email address; matches the identifier passed to freshpaint.identify()}
+  - {name: token, type: string, required: true, role: credential, description: Environment ID from the Server Side API section of the Sources page}
+  - {name: time, type: integer, format: int64, required: true, role: timestamp, description: Epoch seconds the event occurred}
+  - {name: $device_id, type: string, required: false, role: identity-key, description: Device identifier used for stitching and deduplication}
+  - {name: $insert_id, type: string, required: false, role: idempotency-key, description: Unique event identifier for deduplication; computed from time and $device_id when omitted}
+  - {name: $ip, type: string, required: false, role: override, description: Overrides the automatically captured source IP}
+  - {name: $user_props, type: object, required: false, role: profile, description: User properties attached to the profile, primarily with $identify}
+  - {name: $options, type: object, required: false, role: routing, description: Per-event destination allow/deny routing}
+relationships:
+- {from: Event, to: EventProperties, kind: has_one, via: properties, evidence: '$ref #/components/schemas/EventProperties'}
+- {from: EventProperties, to: User, kind: belongs_to, via: distinct_id, evidence: id-reference field, note: User is an implied entity — there is no public schema or read endpoint for a Freshpaint user profile}
+- {from: EventProperties, to: Device, kind: belongs_to, via: $device_id, evidence: id-reference field, note: Device is an implied entity with no public schema}
+- {from: EventProperties, to: Destination, kind: has_many, via: $options, evidence: routing field, note: Destination is an implied entity — configured in the Freshpaint app, with no public schema or REST API}
+- {from: EventProperties, to: Environment, kind: belongs_to, via: token, evidence: the environment ID doubles as the credential, so the auth token IS the tenancy key}
+implied_entities:
+- {name: User, keyed_by: distinct_id, public_schema: false, public_endpoint: false}
+- {name: Device, keyed_by: $device_id, public_schema: false, public_endpoint: false}
+- {name: Environment, keyed_by: token, public_schema: false, public_endpoint: false}
+- {name: Destination, keyed_by: destination name in $options, public_schema: false, public_endpoint: false, cross_ref: 'apis.yml apis[] Freshpaint Destinations'}
+unmodeled:
+  note: >-
+    Freshpaint's product surface (100+ destinations, consent management, web
+    tracker monitoring, audiences, insights, data warehouse sync) is configured
+    in the app. None of it has a documented public REST representation, so it
+    contributes no entities here. The event envelope is the only public
+    contract.
+id_prefixes: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

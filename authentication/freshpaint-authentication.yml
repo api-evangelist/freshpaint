@@ -1,6 +1,6 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: derived
-source: openapi/freshpaint-openapi.yml
+source: openapi/freshpaint-events-api-openapi.yml
 summary:
   types:
   - apiKey
@@ -17,4 +17,4 @@ schemes:
     HTTP API. Obtain the token from the Server Side API section of the Sources page in the Freshpaint
     app.
   sources:
-  - openapi/freshpaint-openapi.yml
+  - openapi/freshpaint-events-api-openapi.yml

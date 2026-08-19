@@ -1,0 +1,173 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Registry metadata endpoints (registry.npmjs.org, repo1.maven.org,
+  trunk.cocoapods.org) plus the first-party GitHub org github.com/freshpaint-io.
+  PyPI, RubyGems, Packagist and crates.io were probed and returned no
+  Freshpaint client library.
+description: >-
+  Freshpaint ships client SDKs for the four collection surfaces it supports:
+  a browser snippet distributed from its own CDN, an Android library on Maven
+  Central, an iOS library on CocoaPods/SwiftPM, and a React Native package on
+  npm. There is no server-side SDK in any language — backends are expected to
+  POST directly to the HTTP Events API at https://api.perfalytics.com/track.
+packages:
+- language: android
+  registry: maven
+  name: io.freshpaint.android:freshpaint
+  url: https://repo1.maven.org/maven2/io/freshpaint/android/freshpaint/
+  install: implementation 'io.freshpaint.android:freshpaint:2.0.5'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-android
+  version: 2.0.5
+  published: '2025-08-18'
+  note: >-
+    Maven Central's newest release is 2.0.5 (2025-08-18). The GitHub repo has
+    shipped 2.1.0 — gradle.properties reads VERSION_NAME=2.1.0 and CHANGELOG.md
+    dates it 20 May 2026 — but 2.1.0 has not been published to Maven Central.
+    The 2.1.0 upgrade note in that changelog also instructs consumers to depend
+    on `io.freshpaint.android:analytics:2.1.0`, and
+    repo1.maven.org/maven2/io/freshpaint/android/analytics/maven-metadata.xml
+    returns 404. As of this probe there is no published coordinate a consumer
+    can resolve for the current Android SDK.
+- language: android
+  registry: maven
+  name: io.freshpaint.android:freshpaint-wear
+  url: https://repo1.maven.org/maven2/io/freshpaint/android/freshpaint-wear/
+  install: implementation 'io.freshpaint.android:freshpaint-wear:1.2.3'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-android
+  version: 1.2.3
+  published: '2025-06-17'
+  note: Wear OS companion artifact from the same Android repo.
+- language: android
+  registry: maven
+  name: io.freshpaint.android:freshpaint-tests
+  url: https://repo1.maven.org/maven2/io/freshpaint/android/freshpaint-tests/
+  install: testImplementation 'io.freshpaint.android:freshpaint-tests:1.2.3'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-android
+  version: 1.2.3
+  published: '2025-06-17'
+  note: Test harness artifact for the Android SDK.
+- language: android
+  registry: maven
+  name: io.freshpaint.android.integrations:appsflyer
+  url: https://repo1.maven.org/maven2/io/freshpaint/android/integrations/appsflyer/
+  install: implementation 'io.freshpaint.android.integrations:appsflyer:0.1.0'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-android-integration-appsflyer
+  version: 0.1.0
+  published: '2022-01-12'
+  note: >-
+    AppsFlyer device-mode integration for the Android SDK. Last published
+    2022-01-12; the backing repo was last pushed 2022-01-13.
+- language: swift
+  registry: cocoapods
+  name: Freshpaint
+  url: https://cocoapods.org/pods/Freshpaint
+  install: pod 'Freshpaint'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-ios
+  version: 0.5.0
+  published: '2026-06-02'
+  note: >-
+    Trunk owners are all @freshpaint.io addresses, which is what establishes
+    first-party. Version history 0.2.1 (2021-12-22), 0.2.2 (2022-01-18),
+    0.2.3 (2025-05-27), 0.5.0 (2026-06-02).
+- language: swift
+  registry: swiftpm
+  name: Freshpaint
+  url: https://github.com/freshpaint-io/freshpaint-ios
+  install: '.package(url: "https://github.com/freshpaint-io/freshpaint-ios.git", from: "0.5.0")'
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-ios
+  version: null
+  published: null
+  note: >-
+    Package.swift (swift-tools-version:5.9, product "Freshpaint", iOS 15+ /
+    tvOS 12+) is present in the iOS repo, so the SDK is SwiftPM-consumable.
+    SwiftPM has no registry metadata endpoint and the repo publishes no GitHub
+    Releases, so there is no resolvable version/date to record here — the
+    CocoaPods entry above carries the dated release.
+- language: javascript
+  registry: npm
+  name: "@freshpaint/freshpaint-react-native"
+  url: https://www.npmjs.com/package/@freshpaint/freshpaint-react-native
+  install: npm install @freshpaint/freshpaint-react-native
+  official: true
+  version: 0.4.0
+  published: '2026-06-02'
+  note: >-
+    React Native bridge over the native iOS/Android SDKs. No repository field
+    is declared in the package manifest. Release cadence 0.2.0 (2025-06-18),
+    0.3.0 (2025-07-07), 0.3.1 (2025-10-07), 0.3.2 (2026-01-06),
+    0.4.0 (2026-06-02).
+- language: javascript
+  registry: npm
+  name: "@freshpaint/babel-plugin-annotate-react"
+  url: https://www.npmjs.com/package/@freshpaint/babel-plugin-annotate-react
+  install: npm install --save-dev @freshpaint/babel-plugin-annotate-react
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-babel-plugin-annotate-react
+  license: MIT
+  version: 2.1.3
+  published: '2021-03-16'
+  note: >-
+    Build-time helper, not a client SDK — annotates React components so
+    Freshpaint's autotrack can target them. Last published 2021-03-16; the
+    backing repo was last pushed 2021-07-27.
+- language: javascript
+  registry: cdn
+  name: freshpaint.js
+  url: https://perfalytics.com/static/js/freshpaint.js
+  install: <script src="https://perfalytics.com/static/js/freshpaint.js"></script>
+  official: true
+  version: null
+  published: null
+  note: >-
+    The browser SDK is served from Freshpaint's own ingestion CDN, not from a
+    package registry, so there is no metadata endpoint to query. The URL is
+    UNPINNED — it carries no version segment and floats to whatever build is
+    current — so a consumer cannot tell which version they are loading either.
+    That is the finding, not a gap in this probe. Observed 2026-08-13:
+    HTTP 200, 341,078 bytes, Last-Modified Wed, 12 Aug 2026 18:01:54 GMT,
+    ETag 04fd2f6c12c6dd7be32a1e043f05368d. No version string is embedded in the
+    bundle. jsDelivr/unpkg carry no copy because it is not an npm package.
+- language: gtm
+  registry: github
+  name: freshpaint-gtm-template
+  url: https://github.com/freshpaint-io/freshpaint-gtm-template
+  install: Import the template into a Google Tag Manager container
+  official: true
+  source_code: https://github.com/freshpaint-io/freshpaint-gtm-template
+  license: Apache-2.0
+  version: null
+  published: null
+  note: >-
+    Google Tag Manager custom template. Distributed as a GTM template, not via
+    a package registry, and the repo publishes no tags or GitHub Releases, so
+    there is no version or publish date to record. Repo last pushed 2026-07-28.
+registries_probed:
+- registry: npm
+  result: 2 first-party packages found under the @freshpaint scope
+- registry: maven
+  result: 4 first-party artifacts under io.freshpaint.android*
+- registry: cocoapods
+  result: 1 first-party pod (Freshpaint)
+- registry: pypi
+  result: 404 on freshpaint, freshpaint-python, freshpaint-sdk — no Python SDK
+- registry: rubygems
+  result: 404 on freshpaint — no Ruby SDK
+- registry: packagist
+  result: no Freshpaint package in search results — no PHP SDK
+- registry: crates.io
+  result: 0 results for freshpaint — no Rust SDK
+- registry: pkg.go.dev
+  result: >-
+    No first-party Go client. The GitHub org contains Go repos (go-orb,
+    mixpanel, amplitude-go, go-customerio) but those are forks of third-party
+    clients used internally, not Freshpaint SDKs.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

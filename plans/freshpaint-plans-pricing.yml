@@ -4,8 +4,13 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Freshpaint
 providerId: freshpaint
 created: '2026-06-25'
-modified: '2026-06-25'
+modified: '2026-08-13'
 reconciled: false
+generated: '2026-08-13'
+method: searched
+source: https://www.freshpaint.io/pricing
+plan_count: 3
+published_prices: 0
 tags:
 - Customer Data Platform
 - Event Tracking
@@ -24,7 +29,11 @@ description: >-
 notes: >-
   Public pricing pages do not list per-tier dollar amounts; figures shown by
   third-party marketplaces vary and are not authoritative. Verify against a
-  Freshpaint sales quote during reconciliation.
+  Freshpaint sales quote during reconciliation. Re-probed 2026-08-13:
+  https://www.freshpaint.io/pricing returns HTTP 200 and still publishes no
+  dollar figures, quotas, or overage rates for any tier — three named tiers
+  with zero published prices. Every path is "contact sales"
+  (https://www.freshpaint.io/contact-sales, HTTP 200).
 sources:
 - https://www.freshpaint.io/pricing
 - https://www.freshpaint.io/contact-sales

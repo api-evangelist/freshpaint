@@ -4,8 +4,12 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Freshpaint
 providerId: freshpaint
 created: '2026-06-25'
-modified: '2026-06-25'
+modified: '2026-08-13'
 reconciled: false
+generated: '2026-08-13'
+method: searched
+source: https://documentation.freshpaint.io/reference/developer/http-api
+limit_count: 2
 tags:
 - Customer Data Platform
 - Event Tracking
@@ -25,11 +29,26 @@ description: >-
 notes: >-
   Only the documented 5000 req/sec burst limit is confirmed from the HTTP API
   reference. Verify any account- or destination-level limits with Freshpaint
-  during reconciliation.
+  during reconciliation. Re-probed 2026-08-13: the source reference
+  https://documentation.freshpaint.io/reference/developer/http-api now
+  307-redirects to https://app.freshpaint.io/docs-login, so this limit can no
+  longer be re-read without a Freshpaint customer account. The figure recorded
+  here was captured while that reference was public and is retained as the
+  last-known-good reading.
 sources:
 - https://documentation.freshpaint.io/reference/developer/http-api
 responseCodes:
   throttled: 429
+responseHeaders:
+  published: []
+  note: >-
+    Freshpaint publishes NO runtime rate-limit signal. There are no
+    X-RateLimit-* or RateLimit-* headers and no Retry-After documented in the
+    HTTP API reference or declared in the OpenAPI, so a caller cannot read
+    remaining budget or a recommended wait from a response — it can only
+    observe a 429 after the fact and choose its own backoff. The documented
+    number is the only signal that exists. Retries are made safe by reusing
+    properties.$insert_id (see conventions/freshpaint-conventions.yml).
 limits:
 - name: HTTP API Burst Limit
   scope: account

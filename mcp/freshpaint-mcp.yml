@@ -1,0 +1,51 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/freshpaint-events-api-openapi.yml
+description: >-
+  Freshpaint publishes NO MCP server. This is a DERIVED candidate tool list
+  showing what an MCP wrapper over the one public Freshpaint operation would
+  look like. It is not an agent surface Freshpaint ships, and no `MCPServer`
+  pointer is wired into apis.yml — emitting one would credit Freshpaint with a
+  server it does not operate.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: probed
+probes:
+- {url: 'https://mcp.freshpaint.io/mcp', method: 'POST tools/list', status: 0, note: 'connection failed; the hostname resolves to an unrelated third-party page (Fxiaoke), not Freshpaint'}
+- {url: 'https://www.freshpaint.io/mcp', method: 'POST tools/list', status: 405, note: 'nginx 405 Not Allowed — marketing site, no MCP endpoint'}
+- {url: 'https://api.perfalytics.com/mcp', method: 'POST tools/list', status: 403, note: 'API Gateway "Missing Authentication Token" — the same body every unmatched path returns; not an MCP route'}
+- {url: 'https://documentation.freshpaint.io/mcp', method: 'POST tools/list', status: 405, note: 'HTTP method not allowed — docs SPA, no MCP endpoint'}
+registries_checked:
+- {registry: npm, query: '@freshpaint scope', result: 'no MCP package — only the React Native SDK and the babel plugin'}
+- {registry: github, query: 'github.com/freshpaint-io repo listing', result: 'no MCP server repo among 23 public repos'}
+server:
+  name: freshpaint
+  transport: null
+  url: null
+tools:
+- name: track_event
+  description: >-
+    Send a single server-side event to Freshpaint for fan-out to the account's
+    active destinations. Reserved event names $identify, $page and $screen
+    drive identify/page/screen behavior; any other value of `event` is a
+    custom tracked event.
+  source_operation: openapi/freshpaint-events-api-openapi.yml#track
+  input_schema_source: >-
+    The real input contract is the requestBody schema
+    #/components/schemas/Event (event + properties, where properties requires
+    distinct_id, token and time).
+  status: candidate
+coverage:
+  rest_operations: 1
+  candidate_tools: 1
+  published_tools: 0
+notes: >-
+  Freshpaint's public API surface is a single ingestion operation. Everything
+  else — destination configuration, consent rules, audiences, tracker
+  monitoring — is done in the Freshpaint app and has no documented public REST
+  API, so there is nothing further to model as tools without fabricating it.

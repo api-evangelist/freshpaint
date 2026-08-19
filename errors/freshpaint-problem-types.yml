@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/freshpaint-events-api-openapi.yml
+format: none
+description: >-
+  Error catalog derived from the declared responses on POST /track. Freshpaint
+  does NOT use RFC 9457 problem details — the contract declares no response
+  schema, no media type, and no error-code registry for any status. Each entry
+  below is therefore status-only: the description is the provider's prose from
+  the contract, and no body shape is asserted because none is published. The
+  docs error reference, if one exists, sits behind app.freshpaint.io/docs-login.
+problems:
+- status: 400
+  type: null
+  title: Malformed event payload or missing required properties
+  detail: >-
+    Returned when the request body is not a valid Event — most commonly a
+    missing required property (event, properties.distinct_id, properties.token
+    or properties.time) or malformed JSON.
+  remediation: >-
+    Validate against #/components/schemas/Event before sending. Required:
+    top-level `event` (string) and `properties`; within properties,
+    `distinct_id`, `token` and `time` (epoch seconds, integer).
+  body_shape: not published
+  source_operation: openapi/freshpaint-events-api-openapi.yml#track
+- status: 429
+  type: null
+  title: Rate limited
+  detail: >-
+    The HTTP API enforces a 5000 request/second burst limit; throttle requests
+    accordingly.
+  remediation: >-
+    Back off and retry. Reuse the same properties.$insert_id on the retry so
+    the event deduplicates rather than double-counting at destinations. No
+    Retry-After or RateLimit-* header is documented, so the backoff interval
+    must be chosen by the client.
+  body_shape: not published
+  source_operation: openapi/freshpaint-events-api-openapi.yml#track
+  cross_ref: rate-limits/freshpaint-rate-limits.yml
+undeclared_statuses:
+  note: >-
+    No 401/403 is declared even though the operation is authenticated by
+    properties.token — the contract does not say what happens on a bad or
+    missing environment token, and no 5xx is declared. Callers cannot know from
+    the contract whether an invalid token fails loudly or is silently dropped
+    at ingest.
+observed:
+- url: https://api.perfalytics.com/openapi.json
+  status: 403
+  body: '{"message":"Missing Authentication Token"}'
+  note: >-
+    Probed 2026-08-13. This is the AWS API Gateway default for any unmatched
+    route on the ingestion host, not a documented Freshpaint error — recorded
+    so it is not mistaken for one.
+gaps:
+- No error-code registry.
+- No error response schema or media type on any status.
+- No RFC 9457 / application/problem+json.
+- No documented authentication-failure status.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

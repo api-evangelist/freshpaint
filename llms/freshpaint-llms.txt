@@ -1,0 +1,88 @@
+# Freshpaint - Healthcare Marketing Performance & Compliance Platform
+> Freshpaint helps healthcare marketers measure ROI, improve campaign performance, and stay HIPAA-compliant across all channels.
+
+The XML sitemap of this website can be found at [sitemap.xml](https://www.freshpaint.io/sitemap.xml).
+
+- [Homepage](https://www.freshpaint.io/)
+- [Login](https://app.freshpaint.io/login)
+- [Book a Demo](https://www.freshpaint.io/contact-sales)
+- [Plans & Pricing](https://www.freshpaint.io/pricing)
+
+## Platform
+> Complete healthcare marketing platform built for privacy and performance
+
+- [Platform Overview](https://www.freshpaint.io/platform-overview): Full overview of Freshpaint's healthcare privacy platform
+
+### Improve Marketing Performance
+> Drive growth without increasing budgets through better performance
+
+- [Improve Marketing Performance](https://www.freshpaint.io/improve-marketing-performance): Drive growth without increasing budgets through better performance
+- [Audiences](https://www.freshpaint.io/freshpaint-audiences): Smart, privacy-first targeting with lookalikes and retargeting lists
+- [Healthcare Integrations](https://www.freshpaint.io/healthcare-integrations): Bring full-funnel marketing to healthcare with 100+ integrations
+- [Maps](https://www.freshpaint.io/hipaa-compliant-maps): HIPAA-compliant map integrations for healthcare marketing
+- [Videos](https://www.freshpaint.io/product/videos): Video tracking and analytics for healthcare marketers
+
+### Measure Marketing Impact
+> Prove marketing's value to unlock budget with real outcome data
+
+- [Measure Marketing Impact](https://www.freshpaint.io/measure-marketing-impact): Prove marketing's value to unlock budget with real outcome data
+- [Insights](https://www.freshpaint.io/insights): One dashboard with every channel's performance and real ROI metrics
+- [Ad Performance](https://www.freshpaint.io/ad-performance): Optimize for patient visits, not form fills, with attended appointment data
+- [Data Warehouse](https://www.freshpaint.io/product/warehouses): Connect your healthcare data to modern data warehouses
+
+### Protect Privacy & Compliance
+> Safeguard your marketing strategy from compliance disruption
+
+- [Protect Privacy & Compliance](https://www.freshpaint.io/protect-privacy-compliance): Safeguard your marketing strategy from compliance disruption
+- [Web Tracker Manager](https://www.freshpaint.io/web-tracker-monitoring): See every tracker on your site and identify compliance risks
+- [Consent Management](https://www.freshpaint.io/consent-manager): Consent that actually works by enforcing preferences at the data layer
+- [Event Tracking](https://www.freshpaint.io/event-tracking): Measure what users actually do, not just what they view on your site
+
+## Healthcare Solutions
+> Industry-specific solutions for healthcare verticals and use cases
+
+- [Hospitals & Health Systems](https://www.freshpaint.io/hospitals-health-systems): HIPAA-compliant marketing solutions for hospital systems
+- [Health Tech & Virtual Care](https://www.freshpaint.io/healthtech-virtual-care): Compliant marketing platforms for healthtech and telehealth companies
+- [Payers & Health Plans](https://www.freshpaint.io/payers-health-plans): Marketing compliance solutions for health plans and payers
+- [Urgent Care & Outpatient](https://www.freshpaint.io/urgent-care-outpatient): Privacy-compliant digital marketing for urgent care centers
+- [Dental & Specialty Practices](https://www.freshpaint.io/dso-dental): Marketing solutions for dental and specialty practices
+- [Pharma & Medical Devices](https://www.freshpaint.io/pharma-medical-devices): Compliant marketing platforms for pharmaceutical and medical device companies
+- [DSO (Dental Support Organizations)](https://www.freshpaint.io/dso-dental): Privacy-first marketing solutions for dental service organizations
+- [Orthopedics](https://www.freshpaint.io/orthopedics): Marketing performance solutions for orthopedic practices
+- [Specialty Providers](https://www.freshpaint.io/specialty): HIPAA-compliant marketing for specialty healthcare providers
+
+## Resources
+> Industry insights, educational content, and marketing resources
+
+- [FAQ](https://www.freshpaint.io/faq): Frequently asked questions about Freshpaint
+- [Blog](https://www.freshpaint.io/blog): Healthcare marketing insights and best practices
+- [Events & Webinars](https://www.freshpaint.io/events-webinars): Upcoming webinars and healthcare marketing events
+- [Marketing Hub](https://www.freshpaint.io/ebooks-reports-and-more): Ebooks, reports, and marketing resources
+- [Newsletter Signup](https://info.freshpaint.io/freshpaint-5-newsletter): Subscribe to Freshpaint newsletter
+- [Podcasts](https://www.freshpaint.io/podcasts): Listen to healthcare marketing experts
+
+## About
+> Company information and contact
+
+- [About Us & Careers](https://www.freshpaint.io/about): Learn about Freshpaint and join our team
+- [News & Press](https://www.freshpaint.io/company-news): Latest company news and press releases
+- [Plans & Pricing](https://www.freshpaint.io/pricing): View Freshpaint pricing plans
+- [Contact Us](https://www.freshpaint.io/contact-us): Get in touch with the Freshpaint team
+- [Get a Demo](https://www.freshpaint.io/contact-sales): Schedule a demo with our team
+- [Case Studies](https://www.freshpaint.io/customers): Real results from healthcare organizations
+- [Partners](https://www.freshpaint.io/become-a-partner): Become a Freshpaint partner
+
+## Customers
+> Customer resources, success stories, and support
+
+- [Login](https://app.freshpaint.io/login): Access your Freshpaint account
+- [System Status](https://status.freshpaint.io): System status and uptime information
+- [Docs](https://documentation.freshpaint.io): Technical documentation and guides
+- [Partner Directory](https://partners.freshpaint.io/): Browse Freshpaint partner integrations
+
+## Legal
+> Privacy policy, terms of service, and compliance information
+
+- [Privacy Policy](https://www.freshpaint.io/privacy-policy): How Freshpaint protects and handles your data
+- [Terms of Service](https://www.freshpaint.io/terms): Terms and conditions for using Freshpaint
+- [Sitemap](https://www.freshpaint.io/sitemap.xml): XML sitemap of the website

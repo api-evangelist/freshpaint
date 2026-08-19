@@ -1,0 +1,96 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Freshpaint HTTP Events API
+  version: 1.0.0
+extends: openapi/freshpaint-events-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Derived from the artifacts in this repo (conventions/, errors/, lifecycle/,
+  rate-limits/, authentication/, data-model/) plus live probes performed
+  2026-08-13. Applies API Evangelist annotations without mutating the harvested
+  contract.
+actions:
+- target: $.info
+  description: >-
+    Correct the broken termsOfService link and record contract provenance and
+    the docs-gating finding.
+  update:
+    termsOfService: https://www.freshpaint.io/terms
+    x-apievangelist-terms-correction: >-
+      The upstream contract points termsOfService at
+      https://www.freshpaint.io/legal/terms-of-service, which returned HTTP 404
+      when probed 2026-08-13. The live terms are at
+      https://www.freshpaint.io/terms (HTTP 200).
+    x-apievangelist-contract-provenance: >-
+      Freshpaint publishes no machine-readable specification at any public URL.
+      /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs
+      and /redoc were probed on api.perfalytics.com (403, AWS API Gateway),
+      www.freshpaint.io (404), documentation.freshpaint.io and
+      app.freshpaint.io (200 SPA shell, not a spec). This document was authored
+      from the developer reference.
+    x-apievangelist-docs-status: >-
+      As of 2026-08-13 documentation.freshpaint.io 307-redirects to
+      app.freshpaint.io/docs-login. The developer reference this contract was
+      built from is no longer publicly readable.
+- target: $.info.contact
+  description: Add the machine-readable status endpoint alongside the support contact.
+  update:
+    x-status-page: https://status.freshpaint.io
+    x-status-api: https://status.freshpaint.io/api/v2/summary.json
+- target: $.paths['/track'].post
+  description: >-
+    Record the runtime semantics an agent needs but the contract does not
+    state — idempotency, rate-limit behavior, and the missing auth-failure
+    status.
+  update:
+    x-idempotency:
+      supported: true
+      field: properties.$insert_id
+      header: null
+      default: computed from properties.time and properties.$device_id when omitted
+      returns_cached_response: false
+      window: not published
+      note: >-
+        Deduplication key, not an Idempotency-Key header. Reuse the same
+        $insert_id on a retry so the event does not double-count downstream.
+    x-rate-limit:
+      limit: 5000
+      window: 1s
+      scope: burst
+      exhaustion_status: 429
+      response_headers: []
+      retry_after: not published
+    x-undeclared-responses:
+      note: >-
+        No 401/403 or 5xx is declared even though the operation is
+        authenticated. The contract does not state what an invalid or missing
+        environment token returns.
+    x-agentic-access-ref: agentic-access/freshpaint-agentic-access.yml
+- target: $.components.schemas.EventProperties.properties['$insert_id']
+  description: Mark the deduplication field as the idempotency key for this operation.
+  update:
+    x-idempotency-key: true
+- target: $.components.schemas.EventProperties.properties.token
+  description: Flag that the credential travels in the request body.
+  update:
+    x-credential: true
+    x-apievangelist-note: >-
+      The credential is carried in the JSON body rather than a header. It will
+      appear in any request-body logging, and it cannot be scoped, rotated per
+      caller, or expressed as a standard OpenAPI header/query security scheme.
+- target: $.components.schemas.EventProperties.properties['$options']
+  description: Document the per-event destination routing control.
+  update:
+    x-routing-control: true
+    x-apievangelist-note: >-
+      Accepts either an allow-list of destinations the event may go to, or a
+      deny-list of destinations it must be withheld from. This is the
+      API-level expression of Freshpaint's per-event governance model.
+- target: $.components.securitySchemes.EnvironmentToken
+  description: Record that the apiKey modeling is an approximation.
+  update:
+    x-actual-location: request body (properties.token)
+    x-apievangelist-note: >-
+      Modeled as apiKey/in:query only because OpenAPI 3.0 cannot express a
+      body-borne credential. Do not send the token as a query parameter.

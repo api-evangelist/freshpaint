@@ -1,0 +1,104 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/freshpaint-events-api-openapi.yml
+docs: https://documentation.freshpaint.io/reference/developer/http-api
+description: >-
+  Cross-cutting request/response semantics for the Freshpaint HTTP Events API.
+  Derived from the OpenAPI in this repo plus the artifacts already captured in
+  authentication/, errors/, lifecycle/ and rate-limits/. The Freshpaint
+  developer reference now 307-redirects to app.freshpaint.io/docs-login, so
+  anything not present in the harvested contract is recorded as unknown rather
+  than guessed.
+authentication:
+  style: in-body token
+  scheme: EnvironmentToken
+  location: request body, properties.token
+  note: >-
+    Unusually, the credential is carried inside the JSON event payload as
+    properties.token rather than in an Authorization header or a query string.
+    The OpenAPI models it as an apiKey scheme because OpenAPI 3.0 has no way to
+    express a body-borne credential. The token is the environment ID from the
+    Server Side API section of the Sources page in the Freshpaint app.
+  cross_ref: authentication/freshpaint-authentication.yml
+idempotency:
+  supported: true
+  mechanism: client-supplied deduplication identifier
+  field: properties.$insert_id
+  header: null
+  scope: per event
+  retention: not published
+  default_behavior: >-
+    When $insert_id is omitted, Freshpaint computes a value from properties.time
+    and properties.$device_id, so retries that reuse the same time and device id
+    deduplicate implicitly.
+  note: >-
+    This is a deduplication key on the ingestion payload, NOT an RFC-style
+    Idempotency-Key request header, and it does not return a cached prior
+    response — it suppresses a duplicate event downstream. It is nevertheless a
+    genuine, provider-documented idempotency contract for POST /track: a client
+    that retries with the same $insert_id will not double-count the event at
+    destinations. The deduplication window and its exact scope (per environment,
+    per destination) are not published.
+  evidence: >-
+    openapi/freshpaint-events-api-openapi.yml
+    #/components/schemas/EventProperties/properties/$insert_id — "Optional
+    unique event identifier used for deduplication. When omitted, Freshpaint
+    computes a value from time and $device_id."
+pagination:
+  supported: false
+  note: >-
+    The public surface is a single write operation (POST /track). There is no
+    public read/list operation, so there is no pagination contract.
+field_expansion:
+  supported: false
+metadata:
+  supported: true
+  mechanism: open property bag
+  note: >-
+    EventProperties is additionalProperties:true, so any custom key/value may
+    ride along with an event beyond the required distinct_id, token and time.
+    properties.$user_props attaches arbitrary user-profile properties, used
+    primarily with the $identify event.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented on either the request or
+    the response. $insert_id is the only client-side handle on an individual
+    event.
+versioning:
+  style: unversioned path
+  note: POST /track carries no version segment, version header, or date pin.
+  cross_ref: lifecycle/freshpaint-lifecycle.yml
+error_envelope:
+  format: not published
+  media_type: null
+  problem_json: false
+  note: >-
+    The contract declares 200, 400 and 429 with prose descriptions only — no
+    response schema and no media type. There is no documented error body shape,
+    no error code registry, and no application/problem+json. Callers can act on
+    the status code and nothing else.
+  cross_ref: errors/freshpaint-problem-types.yml
+rate_limit_signaling:
+  documented_limit: 5000 requests/second burst on POST /track
+  exhaustion_status: 429
+  response_headers: []
+  retry_after: unknown
+  note: >-
+    The numeric limit is documented but no runtime signal is. No X-RateLimit-*
+    or RateLimit-* headers and no Retry-After are described in the contract or
+    the reference, so an agent cannot read remaining budget from a response —
+    it can only observe a 429 after the fact.
+  cross_ref: rate-limits/freshpaint-rate-limits.yml
+routing_controls:
+  field: properties.$options
+  description: >-
+    Per-event destination routing. Accepts a list of destinations the event
+    should be restricted to, or a list of destinations it should be withheld
+    from. This is the API-level expression of Freshpaint's governance model:
+    routing is decided per event rather than only in account configuration.
+content_type: application/json
+transport: HTTPS only
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

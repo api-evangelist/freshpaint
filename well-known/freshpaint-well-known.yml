@@ -1,0 +1,67 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml and OpenAPI servers[] host
+result: none
+description: >-
+  Freshpaint serves no /.well-known/ discovery document on any of its hosts.
+  This file records the probe, not a capability — NO WellKnown, APICatalog or
+  SecurityTxt pointer is wired into apis.yml, because every path either 404d,
+  403d, or returned an SPA HTML shell rather than a document.
+notes: >-
+  Two hosts answer 200 to every /.well-known/* path with the same 1,358-byte
+  React index.html (app.freshpaint.io and documentation.freshpaint.io, which
+  307-redirects into app.freshpaint.io/docs-login). Those are single-page-app
+  catch-alls, not served documents, and are recorded as misses. The ingestion
+  host api.perfalytics.com is an AWS API Gateway that answers every unmatched
+  path with 403 {"message":"Missing Authentication Token"}. The marketing host
+  www.freshpaint.io returns a real 404 body ("Invalid .well-known request").
+hosts:
+- host: https://www.freshpaint.io
+  role: website (apis.yml Website)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://api.perfalytics.com
+  role: API host (apis.yml baseURL + OpenAPI servers[0])
+  documents:
+  - {path: /.well-known/security.txt, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/openid-configuration, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/oauth-authorization-server, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/api-catalog, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/ai-plugin.json, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/agent-card.json, status: 403, note: API Gateway "Missing Authentication Token"}
+  - {path: /.well-known/agent.json, status: 403, note: API Gateway "Missing Authentication Token"}
+- host: https://documentation.freshpaint.io
+  role: documentation host
+  documents:
+  - {path: /.well-known/security.txt, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/openid-configuration, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/api-catalog, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/ai-plugin.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/agent-card.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/agent.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+- host: https://app.freshpaint.io
+  role: application / docs login host
+  documents:
+  - {path: /.well-known/security.txt, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/openid-configuration, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/api-catalog, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/ai-plugin.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/agent-card.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+  - {path: /.well-known/agent.json, status: 200, note: SPA HTML shell — not a document; counted as a miss}
+- host: https://freshpaint.io
+  role: apex domain
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://trust.freshpaint.io
+  role: trust center
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+documents_served: 0

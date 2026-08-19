@@ -1,0 +1,126 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://trust.freshpaint.io/ (fetched 2026-08-13, HTTP 200) for the published
+  compliance program; openapi/freshpaint-events-api-openapi.yml for the
+  cross-cutting API standards.
+description: >-
+  Two separate things are recorded here and should not be confused. Freshpaint
+  has a genuinely strong ORGANIZATIONAL compliance posture — SOC 2 Type 2,
+  HIPAA, HITRUST r2 in progress, with reports available through a real trust
+  center. Its API-level conformance to cross-cutting web-API standards is
+  essentially nil: no OAuth, no OIDC, no RFC 9457, no pagination or versioning
+  contract, and a credential carried in the request body.
+standards:
+- id: hipaa
+  conforms: true
+  evidence: >-
+    Trust center lists HIPAA under Compliance; the whole product is positioned
+    as a HIPAA-compliant healthcare marketing platform and BAAs are offered
+    (see plans/freshpaint-plans-pricing.yml, Enterprise tier).
+  source: https://trust.freshpaint.io/
+- id: soc2-type2
+  conforms: true
+  evidence: >-
+    Trust center lists SOC 2 Type 2 and makes the SOC 2 Report, a Pentest
+    Report and a Security Prospectus available as documents.
+  source: https://trust.freshpaint.io/
+- id: hitrust-r2
+  conforms: false
+  status: in-progress
+  evidence: >-
+    Trust center states Freshpaint "is actively working toward HITRUST r2
+    certification". Recorded as not-yet-conformant, not as a certification.
+  source: https://trust.freshpaint.io/
+- id: iso-27001
+  conforms: false
+  evidence: Not named on the trust center.
+- id: pci-dss
+  conforms: false
+  evidence: Not named on the trust center; Freshpaint does not process card data.
+- id: fedramp
+  conforms: false
+  evidence: Not named on the trust center.
+- id: gdpr
+  conforms: unknown
+  evidence: >-
+    Not named on the trust center page as a compliance item. A privacy policy
+    is published at https://www.freshpaint.io/privacy-policy but was not read
+    as a conformance claim.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    The only securityScheme in the contract is EnvironmentToken (apiKey). No
+    oauth2 flows are declared and no OAuth documentation is public.
+  source: openapi/freshpaint-events-api-openapi.yml
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration 404s or returns an SPA shell on every host.
+  source: well-known/freshpaint-well-known.yml
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No response schema or media type is declared on any status; there is no
+    application/problem+json anywhere in the contract.
+  source: errors/freshpaint-problem-types.yml
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt 404s on freshpaint.io, www.freshpaint.io and trust.freshpaint.io.
+  source: well-known/freshpaint-well-known.yml
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or sunset policy is published.
+  source: lifecycle/freshpaint-lifecycle.yml
+- id: idempotency
+  conforms: partial
+  evidence: >-
+    A client-supplied deduplication identifier (properties.$insert_id) is
+    supported on POST /track, with an implicit fallback computed from time and
+    $device_id. It is not an Idempotency-Key header and returns no cached
+    response, and the deduplication window is unpublished.
+  source: conventions/freshpaint-conventions.yml
+- id: pagination
+  conforms: false
+  evidence: No public read operation exists, so no pagination contract applies.
+- id: json-api
+  conforms: false
+  evidence: Plain application/json event envelope; no JSON:API document structure.
+- id: fhir
+  conforms: false
+  evidence: >-
+    Freshpaint operates in healthcare but the public API is an analytics event
+    ingest, not a clinical data interface. The org has an archived
+    freshpaint-fhir-playground repo (last pushed 2024-03-06) but ships no FHIR
+    contract.
+- id: openapi
+  conforms: true
+  evidence: >-
+    OpenAPI 3.0.1 contract for the HTTP Events API, present in this repo. Note
+    the provenance — Freshpaint does not itself publish a machine-readable
+    spec at any public URL; this document was authored from the developer
+    reference before that reference moved behind the docs login.
+  source: openapi/freshpaint-events-api-openapi.yml
+compliance_program:
+  published: true
+  url: https://trust.freshpaint.io/
+  certifications: [SOC 2 Type 2, HIPAA]
+  in_progress: [HITRUST r2]
+  documents_available: [SOC 2 Report, Pentest Report, Security Prospectus]
+  controls_named:
+  - Encryption at rest and in transit
+  - Access log management
+  - Automated account management
+  - Virtual private cloud
+  - Traffic filtering
+  - Web application firewall
+  - Secure software development lifecycle
+  - Code analysis
+  - Endpoint detection and response
+  - Mobile device management
+  - Incident response
+  - Penetration testing
+  - Employee security awareness training
+  - Vulnerability management program
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

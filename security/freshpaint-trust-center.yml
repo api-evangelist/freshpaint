@@ -1,15 +1,72 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: searched
 probe: true
 source: https://trust.freshpaint.io/
 url: https://trust.freshpaint.io/
+http_status: 200
+fetched: '2026-08-13'
+description: >-
+  Freshpaint runs a real, self-service trust center at trust.freshpaint.io with
+  named certifications, downloadable audit artifacts, and an enumerated control
+  set. This is the strongest single piece of Freshpaint's public posture and
+  the reason a Compliance pointer is wired — it is a published compliance
+  program, not an inferred one.
 certifications:
-- SOC 2
+- SOC 2 Type 2
 - HIPAA
+in_progress:
+- name: HITRUST r2
+  note: >-
+    The trust center states Freshpaint "is actively working toward HITRUST r2
+    certification". Recorded as in-progress, not as a held certification.
+documents:
+- name: SOC 2 Report
+- name: Pentest Report
+- name: Security Prospectus
+controls:
+- Encryption at rest
+- Encryption in transit
+- Access log management
+- Automated account management
+- Virtual private cloud
+- Traffic filtering
+- Web application firewall
+- Software development lifecycle
+- Code analysis
+- Endpoint detection and response
+- Mobile device management
+- Incident response
+- Penetration testing
+- Employee training
+programs:
+- name: Vulnerability Management Program
+  description: >-
+    Freshpaint maintains a vulnerability management program to identify,
+    assess, remediate, verify, and report technical vulnerabilities.
+  note: >-
+    This is an INTERNAL vulnerability management program. It is not a public
+    vulnerability disclosure program — see gaps below.
+- name: Security Awareness Training Program
+- name: Endpoint Security and Device Management Program
+subprocessors:
+  section_present: true
+  list_captured: false
+  note: A Subprocessors section is referenced on the trust center but no list was returned in the fetched content.
+gaps:
+- >-
+  No vulnerability disclosure or bug bounty program is named anywhere on the
+  trust center, and no security contact email is published. /.well-known/
+  security.txt returns 404 on freshpaint.io, www.freshpaint.io and
+  trust.freshpaint.io, and /security, /responsible-disclosure,
+  /security/responsible-disclosure and /vulnerability-disclosure all return 404
+  on www.freshpaint.io. A researcher who finds a bug in a HIPAA-scoped platform
+  has no published route to report it. No Security or VulnerabilityDisclosure
+  pointer is wired, because there is nothing to point at.
 evidence:
 - source: https://trust.freshpaint.io/
-  keywords:
-  - soc 2
-  - soc2
-  - hipaa
-  - trust center
+  http_status: 200
+  fetched: '2026-08-13'
+  keywords: [soc 2 type 2, hipaa, hitrust r2, trust center, pentest report, vulnerability management]
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

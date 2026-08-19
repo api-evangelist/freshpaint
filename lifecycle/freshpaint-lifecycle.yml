@@ -1,0 +1,76 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://status.freshpaint.io (probed 200, Instatus-hosted, machine-readable
+  summary at /api/v2/summary.json), plus the SDK release history in
+  github.com/freshpaint-io and the version metadata in the OpenAPI.
+versioning:
+  scheme: unversioned-path
+  current: '1.0'
+  docs: https://documentation.freshpaint.io/reference/developer/http-api
+  note: >-
+    The HTTP Events API is served at an unversioned path (POST /track on
+    https://api.perfalytics.com) with no version segment, header, or date
+    pinning. info.version "1.0" in the OpenAPI is the document's version, not a
+    contract Freshpaint publishes to callers. The linked reference now
+    307-redirects to app.freshpaint.io/docs-login, so the versioning policy
+    cannot be re-read without a customer account.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation or sunset policy is published on any public Freshpaint
+    surface. /security, /responsible-disclosure, /changelog and
+    /product-updates all 404 on www.freshpaint.io, and the deprecation guidance
+    that may exist inside the docs site sits behind the docs login. No
+    Deprecation pointer is wired — the policy is not publicly demonstrable.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public uptime commitment. SLA terms are presumably part of the
+    enterprise agreement, which is sales-quoted (see plans/).
+status_page: https://status.freshpaint.io
+status_page_detail:
+  provider: Instatus
+  human_url: https://status.freshpaint.io
+  machine_url: https://status.freshpaint.io/api/v2/summary.json
+  observed: '2026-08-13'
+  http_status: 200
+  observed_status: UP
+  note: >-
+    Statuspage-compatible JSON is served at both /api/v2/summary.json and
+    /summary.json (both 200); /api/v2/status.json 404s.
+deprecated_operations: []
+sdk_lifecycle:
+- component: Android SDK
+  repo: https://github.com/freshpaint-io/freshpaint-android
+  latest_source_version: 2.1.0
+  latest_source_date: '2026-05-20'
+  latest_published_version: 2.0.5
+  latest_published_date: '2025-08-18'
+  registry: Maven Central (io.freshpaint.android:freshpaint)
+  note: >-
+    A real distribution gap: 2.1.0 is released in the repo's CHANGELOG.md and
+    gradle.properties but is not on Maven Central, and the coordinate its own
+    upgrade note tells consumers to use — io.freshpaint.android:analytics —
+    404s on repo1.maven.org. Callers on 2.0.x cannot resolve the current SDK.
+- component: iOS SDK
+  repo: https://github.com/freshpaint-io/freshpaint-ios
+  latest_published_version: 0.5.0
+  latest_published_date: '2026-06-02'
+  registry: CocoaPods (Freshpaint) + SwiftPM
+- component: React Native SDK
+  latest_published_version: 0.4.0
+  latest_published_date: '2026-06-02'
+  registry: npm (@freshpaint/freshpaint-react-native)
+- component: Browser SDK
+  url: https://perfalytics.com/static/js/freshpaint.js
+  latest_published_version: null
+  note: >-
+    Unpinned CDN distribution — no version segment in the URL and no version
+    string in the bundle. Last-Modified 2026-08-12. Consumers are always on
+    whatever build is current, with no way to pin or roll back.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

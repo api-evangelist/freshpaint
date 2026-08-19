@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://github.com/freshpaint-io/freshpaint-ios/blob/main/CHANGELOG.md and
+  https://github.com/freshpaint-io/freshpaint-android/blob/main/CHANGELOG.md
+scope: sdk
+description: >-
+  Freshpaint publishes NO changelog for the platform or the HTTP Events API on
+  any public surface — www.freshpaint.io/changelog and
+  www.freshpaint.io/product-updates both 404, and any release notes inside the
+  docs site sit behind app.freshpaint.io/docs-login. What IS public and dated
+  is the changelog kept in each first-party mobile SDK repo. Those are captured
+  here; they are the only dated, structured change record Freshpaint publishes
+  openly, and they do describe consumer-visible payload changes that affect
+  what arrives at destinations.
+versioning_scheme: semver (per SDK)
+current_versions:
+  android_source: 2.1.0
+  android_published: 2.0.5
+  ios: 0.5.0
+  react_native: 0.4.0
+  http_api: unversioned
+entries:
+- component: Android SDK
+  version: 2.1.0
+  date: '2026-05-20'
+  breaking: true
+  highlights:
+  - MMP attribution support — GAID collection, Google Play Install Referrer, and deep-link attribution across 24 ad platforms plus UTM params.
+  - New AttributionMiddleware enriches every event with device identifiers and attribution context.
+  - Application Installed lifecycle event carries a full attribution payload (install_timestamp, device_id, gaid, android_id, limit_ad_tracking, os_version, app_version, referrer/click-id fields).
+  - Event payload flattened to match the React Native SDK structure; userAgent added to the analytics context.
+  - New Builder option trackFirstOpen(boolean), default true.
+  breaking_changes:
+  - Click IDs and UTM params moved from event `properties` into event `context` — downstream consumers reading properties.utm_* / properties.$gclid must move to context.utm_* / context.$gclid.
+  - The SDK manifest now declares com.google.android.gms.permission.AD_ID, which the manifest merger adds to every host app; apps targeting API 33+ must declare ad/analytics use in the Play Console Data Safety form.
+  - com.android.installreferrer:installreferrer:2.2 is now a bundled transitive dependency.
+  - Builder.trackAttributionInformation() is no longer a no-op — it now performs an Install Referrer fetch.
+  distribution_note: >-
+    Not published to Maven Central as of 2026-08-13; the newest resolvable
+    release there is 2.0.5.
+- component: iOS SDK
+  version: 0.5.0
+  date: '2026-05-06'
+  breaking: false
+  highlights:
+  - MMP attribution support — NSUserDefaults-backed stable device ID, ATT status and IDFA gating via FPAttributionMiddleware, Apple Ads attribution token and SKAdNetwork conversion value.
+  - Application Installed lifecycle event carries install_timestamp, device_id, idfv, idfa, att_status, os_version, app_version.
+  - Deep-link attribution — ad click IDs (24 platforms) and UTM params extracted from incoming URLs into event context.
+  - Event payload flattened to match the React Native SDK; userAgent added to the analytics context for Android parity.
+  fixes:
+  - Keychain replaced with NSUserDefaults for the persistent device ID, avoiding App Store flags for identifiers surviving uninstall.
+  - Install event name reverted to Application Installed for backward compatibility with existing client pipelines.
+  - app_install now fires correctly on the iOS 26 SwiftUI scene lifecycle; macOS app_install payload now includes device_id.
+- component: iOS SDK
+  version: 0.4.2
+  date: '2026-04-01'
+  breaking: false
+  highlights:
+  - Removed an unused netinet6/in6.h private header import from FPReachability.m that caused App Store submission warnings.
+- component: iOS SDK
+  version: 0.4.1
+  date: '2025-11-25'
+  breaking: false
+  highlights:
+  - $is_first_event_in_session now applies only to engagement events (track, screen), not metadata events (identify, group, alias), fixing GA4 attribution.
+  - Fixed a session-handling race that produced inconsistent session-start flags when multiple events fired simultaneously.
+- component: iOS SDK
+  version: 0.4.0
+  date: '2025-07-10'
+  breaking: false
+  highlights:
+  - SwiftUI automatic screen-view tracking with deduplication.
+  - firebase_screen and firebase_screen_class added to screen events for Firebase Analytics.
+gaps:
+- No changelog or release notes for the HTTP Events API itself.
+- No changelog for the browser SDK, which is distributed unpinned from a CDN.
+- No public platform/product changelog; www.freshpaint.io/changelog returns 404.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

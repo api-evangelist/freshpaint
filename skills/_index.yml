@@ -1,0 +1,29 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Generated from openapi/freshpaint-events-api-openapi.yml and the
+  conventions/, errors/, rate-limits/ and data-model/ artifacts in this repo.
+  No provider-published skills or AGENTS.md were found on any Freshpaint
+  surface — the docs host redirects to a login and the GitHub org carries no
+  agent instruction files.
+note: >-
+  Freshpaint's public API is a single operation, so the skill set is scoped to
+  the two distinct ways that operation is used rather than to separate
+  products.
+skills:
+- file: freshpaint-send-server-side-event.md
+  name: Send a server-side event to Freshpaint
+  api: openapi/freshpaint-events-api-openapi.yml
+  operations: [track]
+  summary: >-
+    Emit a custom tracked event from a backend with correct body-borne
+    authentication, a stable $insert_id for retry-safe deduplication, per-event
+    destination routing via $options, and 429 backoff.
+- file: freshpaint-identify-and-page-events.md
+  name: Identify a user and emit page/screen events server-side
+  api: openapi/freshpaint-events-api-openapi.yml
+  operations: [track]
+  summary: >-
+    Use the reserved $identify, $page and $screen event names on the same
+    endpoint to attach user profile properties and record views, keeping
+    server-side activity stitched to the same distinct_id as the client SDKs.
