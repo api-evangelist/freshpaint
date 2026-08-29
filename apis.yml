@@ -7,6 +7,18 @@ description: Freshpaint is a healthcare privacy platform and customer-data platf
   fanning it out to 100+ marketing, analytics, and data destinations. Its server-side
   HTTP API ingests track, identify, page, and screen events at https://api.perfalytics.com/track
   authenticated with an environment token.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
