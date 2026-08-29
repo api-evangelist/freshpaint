@@ -94,6 +94,9 @@ apis:
   - type: ErrorCatalog
     url: errors/freshpaint-problem-types.yml
 common:
+- type: CapabilityMap
+  url: capabilities/freshpaint-capability-edges.yml
+  name: Freshpaint Business Capability Map
 - type: AgenticAccess
   url: agentic-access/freshpaint-agentic-access.yml
 - type: TrustCenter
