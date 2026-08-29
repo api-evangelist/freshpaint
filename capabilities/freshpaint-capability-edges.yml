@@ -18,8 +18,8 @@ edges:
   capability_id: BC-4280.10
   capability_id_l1: BC-4280
   capability_name: Product Telemetry Instrumentation
-  confidence: 0.8
-  evidence: The Freshpaint server-side HTTP API for sending events to Freshpaint from your backend...
-    used to track custom events, identify users ($identify), and emit page and screen events
-  reason: This is event telemetry ingestion for a CDP/analytics platform — product usage event capture,
-    not any healthcare capability despite the vendor's HIPAA positioning.
+  confidence: 0.7
+  evidence: The Freshpaint server-side HTTP API for sending events... used to track custom events, identify
+    users ($identify), and emit page and screen events
+  reason: Server-side event ingestion for a customer-data/analytics platform — product/usage telemetry
+    instrumentation, not a healthcare capability despite the vendor's HIPAA framing.
