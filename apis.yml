@@ -52,7 +52,7 @@ apis:
 - aid: freshpaint:freshpaint-destinations
   name: Freshpaint Destinations
   tags:
-  - Destinations
+  - Destination
   - Integration
   - Data Activation
   tags_raw:
