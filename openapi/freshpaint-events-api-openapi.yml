@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Freshpaint HTTP Events API
   description: The Freshpaint server-side HTTP API for sending events to Freshpaint from your backend. Events are sent as POST requests to the /track endpoint and are fanned out to your active destinations. The same endpoint is used to track custom events, identify users ($identify), and emit page and screen events. Authentication is performed with your environment token, supplied in the event payload as properties.token.
@@ -20,7 +20,7 @@ paths:
       operationId: track
       tags:
       - Events
-      summary: Send a server-side event to Freshpaint.
+      summary: Send a server-side event to Freshpaint
       description: Send a single server-side event to Freshpaint. The event is routed to all active destinations unless restricted via the $options property. Reserved event names ($identify, $page, $screen) drive identify, page, and screen behavior; any other value of `event` is treated as a custom tracked event. The environment token is supplied in properties.token.
       requestBody:
         required: true
