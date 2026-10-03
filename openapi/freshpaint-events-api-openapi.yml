@@ -69,6 +69,18 @@ paths:
           description: Rate limited. The HTTP API enforces a 5000 request/second burst limit; throttle requests accordingly.
 components:
   schemas:
+    Event:
+      type: object
+      required:
+      - event
+      - properties
+      properties:
+        event:
+          type: string
+          description: Name of the event. Use $identify for server-side identify, $page for a page event, $screen for a screen event, or any custom string for a tracked event.
+          example: Order Completed
+        properties:
+          $ref: '#/components/schemas/EventProperties'
     EventProperties:
       type: object
       required:
@@ -108,18 +120,6 @@ components:
           additionalProperties: true
       additionalProperties: true
       description: Event properties. In addition to the required distinct_id, token, and time, any custom properties may be included.
-    Event:
-      type: object
-      required:
-      - event
-      - properties
-      properties:
-        event:
-          type: string
-          description: Name of the event. Use $identify for server-side identify, $page for a page event, $screen for a screen event, or any custom string for a tracked event.
-          example: Order Completed
-        properties:
-          $ref: '#/components/schemas/EventProperties'
   securitySchemes:
     EnvironmentToken:
       type: apiKey
