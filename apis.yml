@@ -44,7 +44,7 @@ tags:
 - Privacy
 - Analytics
 created: '2026-06-25'
-modified: '2026-08-13'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 x-enrichment:
   date: '2026-08-13'
@@ -97,6 +97,8 @@ apis:
   - type: ErrorCatalog
     url: errors/freshpaint-problem-types.yml
 common:
+- url: https://www.freshpaint.io/blog/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/freshpaint-capability-edges.yml
   name: Freshpaint Business Capability Map
