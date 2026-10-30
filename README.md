@@ -1,4 +1,4 @@
-# Freshpaint (freshpaint)
+# Freshpaint
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,112 +66,139 @@
 
 Freshpaint is a healthcare privacy platform and customer-data platform that collects first-party event data and governs it for HIPAA compliance before fanning it out to 100+ marketing, analytics, and data destinations. Its server-side HTTP API ingests track, identify, page, and screen events at https://api.perfalytics.com/track authenticated with an environment token.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/freshpaint/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/freshpaint/refs/heads/main/apis.yml)
+**Areas:** Customer Data Platform · Event Tracking · Healthcare · HIPAA · Privacy · Analytics
 
-## Tags
+## Freshpaint on APIs.io
 
-- Customer Data Platform
-- Event Tracking
-- Healthcare
-- HIPAA
-- Privacy
-- Analytics
+Everything profiled for Freshpaint is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/freshpaint/](https://apis.io/providers/freshpaint/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-06-25
-- **Modified:** 2026-06-25
+- [Freshpaint Destinations](https://apis.io/apis/freshpaint/freshpaint-destinations/) — Destinations are the marketing, analytics, advertising, and data-warehouse tools Freshpaint forwards collected events to. Destinations are configured in the…
+- [Freshpaint Events API](https://apis.io/apis/freshpaint/freshpaint-events-api/) — The Events API from Freshpaint — 1 operation(s) for events.
 
-## APIs
+### Published properties
 
-### Freshpaint Tracking Events API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Server-side HTTP API for sending custom tracked events to Freshpaint via POST /track, authenticated with an environment token in the event payload and routed to all active destinations.
+#### MCP servers (1)
 
-- **Human URL:** [https://documentation.freshpaint.io/reference/developer/http-api](https://documentation.freshpaint.io/reference/developer/http-api)
-- **Base URL:** `https://api.perfalytics.com`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [freshpaint](https://apis.io/servers/freshpaint/freshpaint/)
 
-- Events
-- Tracking
-- Server Side
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://documentation.freshpaint.io/reference/developer/http-api)
-- [API Reference](https://documentation.freshpaint.io/integrations/sources/server-side)
-- [OpenAPI](openapi/freshpaint-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/freshpaint.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/freshpaint.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Freshpaint Agentic Access](https://apis.io/agentic-access/freshpaint/freshpaint-agentic-access/)
 
-### Freshpaint Identify API
+#### Collections (2)
 
-Server-side identify via the $identify event on POST /track, attaching user properties ($user_props) to a distinct_id to build unified user profiles.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://documentation.freshpaint.io/reference/developer/http-api](https://documentation.freshpaint.io/reference/developer/http-api)
-- **Base URL:** `https://api.perfalytics.com`
+- [Freshpaint HTTP API](https://apis.io/collections/freshpaint/open-freshpaint/)
+- [Freshpaint HTTP Events API](https://apis.io/collections/freshpaint/open-freshpaint-events-api/)
 
-#### Tags
+#### Overlays (1)
 
-- Identify
-- User Profiles
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Properties
+- [Freshpaint Events Api Overlay](https://apis.io/overlays/freshpaint/freshpaint-events-api-overlay/)
 
-- [Documentation](https://documentation.freshpaint.io/reference/developer/http-api)
-- [OpenAPI](openapi/freshpaint-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/freshpaint.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/freshpaint.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (3)
 
-### Freshpaint Page and Screen API
+Authentication, trust centre, and vulnerability disclosure.
 
-Page and screen events sent through POST /track to trigger virtual pageviews and screen views in downstream destinations, carrying name, category, and contextual properties.
+- [Freshpaint Authentication](https://apis.io/security/freshpaint/freshpaint-authentication/)
+- [Freshpaint Domain Security](https://apis.io/security/freshpaint/freshpaint-domain-security/)
+- [Freshpaint Trust Center](https://apis.io/security/freshpaint/freshpaint-trust-center/)
 
-- **Human URL:** [https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference](https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference)
-- **Base URL:** `https://api.perfalytics.com`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Page
-- Screen
-- Pageviews
+- [Freshpaint Plans Pricing](https://apis.io/plans/freshpaint/freshpaint-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://documentation.freshpaint.io/reference/developer/freshpaint-sdk-reference)
-- [OpenAPI](openapi/freshpaint-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/freshpaint.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/freshpaint.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Freshpaint Destinations
+- [Freshpaint Rate Limits](https://apis.io/rate-limits/freshpaint/freshpaint-rate-limits/)
 
-Destinations are the marketing, analytics, advertising, and data-warehouse tools Freshpaint forwards collected events to. Destinations are configured in the Freshpaint app; per-event routing is controlled with the $options property on the HTTP API. No public REST API for destination configuration is documented.
+#### FinOps (1)
 
-- **Human URL:** [https://documentation.freshpaint.io/integrations/destinations](https://documentation.freshpaint.io/integrations/destinations)
-- **Base URL:** `https://api.perfalytics.com`
+What the API costs to run, by operation.
 
-#### Tags
+- [Freshpaint Finops](https://apis.io/finops/freshpaint/freshpaint-finops/)
 
-- Destinations
-- Integrations
-- Data Activation
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://documentation.freshpaint.io/integrations/destinations)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/freshpaint-io)
-- [LinkedIn](https://www.linkedin.com/company/freshpaint)
 - [Website](https://www.freshpaint.io)
 - [Documentation](https://documentation.freshpaint.io)
-- [Plans](plans/freshpaint-plans-pricing.yml)
-- [Rate Limits](rate-limits/freshpaint-rate-limits.yml)
-- [Fin Ops](finops/freshpaint-finops.yml)
+- [Pricing](https://www.freshpaint.io/pricing)
+- [Sign up](https://app.freshpaint.io/login)
+- [Support](https://www.freshpaint.io/contact-us)
+- [Blog](https://www.freshpaint.io/blog)
+- [Compliance](https://trust.freshpaint.io/)
+- [Terms of service](https://www.freshpaint.io/terms)
+- [Privacy policy](https://www.freshpaint.io/privacy-policy)
+- [GitHub](https://github.com/freshpaint-io)
+- [Status](https://status.freshpaint.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 50.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 50.8 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 28.0 |
+| Access clarity | 78.9 |
+
+**Agent readiness 27.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | derived (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 23.4** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/freshpaint/](https://apis.io/providers/freshpaint/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Freshpaint: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/freshpaint/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
